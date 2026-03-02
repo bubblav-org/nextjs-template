@@ -109,22 +109,23 @@ export default function HomePage() {
               A fast, intelligent AI chatbot for your website. Deploy in 5 minutes
               with no coding required.
             </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row items-center">
               <Link
-                href="https://www.bubblav.com"
+                href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbubblav-org%2Fnextjs-template&env=NEXT_PUBLIC_BUBBLAV_WEBSITE_ID&envDescription=Website%20ID%20from%20BubblaV%20dashboard"
                 target="_blank"
-                rel="noopener"
-                className="inline-flex h-11 items-center justify-center rounded-md bg-foreground px-8 text-sm font-medium text-background shadow transition-all hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
+                rel="noopener noreferrer"
+                data-slot="button"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-md px-8 shadow-sm"
               >
-                Get Started Free
-              </Link>
-              <Link
-                href="https://docs.bubblav.com"
-                target="_blank"
-                rel="noopener"
-                className="inline-flex h-11 items-center justify-center rounded-md border border-border bg-background px-8 text-sm font-medium shadow-sm transition-all hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
-              >
-                Read the Docs
+                <svg
+                  className="h-4 w-4"
+                  viewBox="0 0 76 65"
+                  fill="currentColor"
+                >
+                  <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" />
+                </svg>
+                <div className="w-px h-4 bg-primary-foreground/20 mx-1" />
+                Deploy to Vercel
               </Link>
             </div>
           </div>
@@ -197,12 +198,12 @@ export default function HomePage() {
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row justify-center">
               <Link
-                href="https://www.bubblav.com"
+                href="https://www.bubblav.com/dashboard"
                 target="_blank"
                 rel="noopener"
                 className="inline-flex h-11 items-center justify-center rounded-md bg-foreground px-8 text-sm font-medium text-background shadow transition-all hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
               >
-                Start Free Trial
+                Get Started
               </Link>
               <Link
                 href="https://docs.bubblav.com"
