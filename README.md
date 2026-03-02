@@ -1,128 +1,192 @@
 # BubblaV NextJS Starter Template
 
-A fast, beautiful NextJS starter template showcasing the [BubblaV AI Chatbot](https://www.bubblav.com). This template demonstrates how to integrate intelligent customer support into your NextJS application.
+A production-ready Next.js 16 starter template with built-in [BubblaV AI Chatbot](https://www.bubblav.com) integration. Deploy intelligent customer support in minutes—no coding required.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbubblav-org%2Fnextjs-template&env=NEXT_PUBLIC_BUBBLAV_WEBSITE_ID&envDescription=Website%20ID%20from%20BubblaV%20dashboard)
 
 ## Live Demo
 
-- **NextJS**: https://bubblav-nextjs-template.vercel.app
+- **NextJS Template**: https://bubblav-nextjs-template.vercel.app
 
 ## Features
 
-- ⚡️ **Next.js 16** with App Router
-- 🎨 **Tailwind CSS** for styling
-- 🌙 **Dark/Light Theme** support with next-themes
-- 🤖 **BubblaV AI Chatbot** integration
-- 🎭 **Framer Motion** animations
-- 📱 **Responsive** design for mobile, tablet, and desktop
-- ♿ **Accessible** components
-- 🎨 **Vercel-inspired** design system
+- ⚡️ **Next.js 16** with React 19 and App Router
+- 🎨 **Tailwind CSS v4** for modern styling
+- 🌙 **Dark/Light Theme** with system detection
+- 🤖 **AI Chatbot** fully integrated and ready to customize
+- 📱 **Mobile-first** responsive design
+- ♿ **Accessible** (WCAG compliant) components
+- 🚀 **Vercel-optimized** for instant deployment
 
-## Quick Start
+## Getting Started
 
-### Deploy to Vercel
+### 🚀 Deploy to Vercel (30 seconds)
 
-Click the button above to deploy this template to Vercel in one click.
+Click the button above to deploy with one click. Vercel will prompt you for the `NEXT_PUBLIC_BUBBLAV_WEBSITE_ID` environment variable.
 
-### Run Locally
+**Next steps after deployment:**
+1. Get your Website ID from [bubblav.com dashboard](https://www.bubblav.com)
+2. Add it as an environment variable in Vercel
+3. Your site redeploys automatically with the chatbot active
+
+### 💻 Run Locally
 
 ```bash
-# Install dependencies
+# 1. Install dependencies
 npm install
 
-# Run development server
+# 2. Create .env.local and add your Website ID
+echo 'NEXT_PUBLIC_BUBBLAV_WEBSITE_ID=your-website-id-here' > .env.local
+
+# 3. Start development server (runs on http://localhost:3000)
 npm run dev
 
-# Build for production
-npm run build
-
-# Start production server
-npm start
+# 4. Make changes and see them instantly!
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see the result.
+For production builds:
+```bash
+npm run build && npm start
+```
 
-## Integrating BubblaV Chatbot
+## Setting Up Your AI Chatbot
 
-This template includes the BubblaV chatbot widget. To customize:
+### Step 1: Create a BubblaV Account
 
-1. Sign up at [bubblav.com](https://www.bubblav.com)
-2. Create a website and get your Website ID
-3. Update the `websiteId` in `components/bubblav-chatbot.tsx`:
+1. Go to [bubblav.com](https://www.bubblav.com) and sign up
+2. Create a new website/project
+3. Copy your Website ID from the dashboard
 
+### Step 2: Add Your Website ID
+
+Update your environment variable:
+
+```env
+# .env.local (development)
+NEXT_PUBLIC_BUBBLAV_WEBSITE_ID=your-website-id
+
+# In Vercel dashboard (production)
+# Set the same variable in your project settings
+```
+
+### Step 3: Customize the Widget (Optional)
+
+The chatbot widget is automatically initialized on all pages. To customize its behavior:
+
+**Open chat programmatically:**
 ```typescript
-<BubblaVChatbot websiteId="your-website-id" />
-```
+import { useBubblaVWidget } from '@bubblav/ai-chatbot-react'
 
-### Ask AI Button
+export function MyComponent() {
+  const widget = useBubblaVWidget()
 
-The template includes an "Ask AI" button in the header that opens the chat widget:
-
-```tsx
-import { AskAiButton } from '@/components/ask-ai-button';
-import { openChat } from '@/components/bubblav-chatbot';
-
-<AskAiButton onClick={openChat} />
-```
-
-## Documentation
-
-- [BubblaV Documentation](https://docs.bubblav.com)
-- [Installation Guide](https://docs.bubblav.com/user-guide/installation)
-- [SDK Reference](https://docs.bubblav.com/developer-guide/sdk-reference)
-- [Integrations](https://www.bubblav.com/integrations)
-
-## Customization
-
-### Theme Colors
-
-Edit `app/globals.css` to customize the color scheme:
-
-```css
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --vercel-blue: #0070f3;
-  /* ... */
+  return (
+    <button onClick={() => widget?.open()}>
+      Ask AI Assistant
+    </button>
+  )
 }
 ```
 
-### Styling
+The "Ask AI" button in the header (`components/Header.tsx`) already demonstrates this pattern.
 
-The template follows Vercel's design guidelines:
-- Clean, minimal aesthetic
-- Smooth animations
-- Responsive breakpoints
-- Dark/light mode support
+## Customizing Your Template
 
-## Skills Used
+### Change Colors & Theme
 
-This template follows best practices from these Claude Code skills:
+Edit CSS variables in `app/globals.css`:
 
-- [web-design-guidelines](https://github.com/vercel-labs/agent-skills)
-- [ui-ux-pro-max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)
-- [vercel-react-best-practices](https://github.com/vercel-labs/agent-skills)
+```css
+:root {
+  /* Light mode colors */
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: #0070f3;
+  /* ... more colors */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark mode overrides */
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+```
+
+### Add New Pages
+
+Create files in the `app/` directory:
+
+```typescript
+// app/about/page.tsx
+export default function About() {
+  return <div>About page</div>
+}
+```
+
+### Add UI Components
+
+Use shadcn/ui:
+```bash
+npx shadcn add button
+npx shadcn add card
+npx shadcn add dialog
+```
+
+### Style Guide
+
+The template uses:
+- **Colors**: oklch-based CSS variables (light/dark mode support)
+- **Typography**: Geist font family (sans & mono)
+- **Spacing**: Tailwind's standard scale
+- **Radius**: 0.625rem (rounded corners)
+
+## Resources & Documentation
+
+### Official Docs
+- [BubblaV Docs](https://docs.bubblav.com) - Chatbot setup, features, API
+- [Installation Guide](https://docs.bubblav.com/user-guide/installation) - Detailed setup steps
+- [SDK Reference](https://docs.bubblav.com/developer-guide/sdk-reference) - React SDK API
+
+### Related Docs
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS v4](https://tailwindcss.com/docs)
+- [shadcn/ui Components](https://ui.shadcn.com)
+
+### Integration Options
+- [BubblaV Integrations](https://www.bubblav.com/integrations) - Shopify, HubSpot, Zendesk, etc.
 
 ## Tech Stack
 
-- [Next.js](https://nextjs.org/) - React framework
-- [React](https://react.dev/) - UI library
-- [Tailwind CSS](https://tailwindcss.com/) - Styling
-- [Framer Motion](https://www.framer.com/motion/) - Animations
-- [next-themes](https://github.com/pacocoursey/next-themes) - Theme management
-- [lucide-react](https://lucide.dev/) - Icons
-- [@bubblav/ai-chatbot-react](https://www.npmjs.com/package/@bubblav/ai-chatbot-react) - Chatbot SDK
+| Purpose | Technology |
+|---------|-----------|
+| **Framework** | [Next.js 16](https://nextjs.org/) (React 19) |
+| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) |
+| **Components** | [shadcn/ui](https://ui.shadcn.com/) |
+| **Dark Mode** | [next-themes](https://github.com/pacocoursey/next-themes) |
+| **Icons** | [lucide-react](https://lucide.dev/) |
+| **Chatbot SDK** | [@bubblav/ai-chatbot-react](https://www.npmjs.com/package/@bubblav/ai-chatbot-react) |
+| **Language** | TypeScript 5 |
+
+## Development
+
+For developers working on this template, see [CLAUDE.md](./CLAUDE.md) for:
+- Development workflow and commands
+- Architecture and code patterns
+- Environment setup details
+- Troubleshooting guide
 
 ## License
 
-MIT
+MIT License - see LICENSE file for details
 
-## Support
+## Getting Help
 
-- [Documentation](https://docs.bubblav.com)
-- [GitHub Issues](https://github.com/bubblav-org/nextjs-template/issues)
-- [Contact](https://www.bubblav.com/contact)
+- 📖 **Docs**: [BubblaV Documentation](https://docs.bubblav.com)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/bubblav-org/nextjs-template/issues)
+- 💬 **Contact**: [BubblaV Support](https://www.bubblav.com/contact)
+- 🤖 **Use the chatbot**: Click the "Ask AI" button on the live demo site!
 
 ---
 
