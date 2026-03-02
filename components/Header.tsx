@@ -2,16 +2,9 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useBubblaVWidget } from '@bubblav/ai-chatbot-react'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 
 export function Header() {
-  const widget = useBubblaVWidget()
-
-  const handleOpenChat = () => {
-    widget?.open()
-  }
-
   return (
     <header className="border-b border-border/50 bg-background/80 backdrop-blur-md sticky top-0 z-50">
       <div className="container flex h-14 max-w-screen-2xl items-center justify-between">
@@ -29,7 +22,7 @@ export function Header() {
               className="object-contain"
             />
           </div>
-          <span className="font-semibold text-sm">BubblaV</span>
+          <span className="font-semibold text-sm hidden sm:inline">BubblaV</span>
         </Link>
         <nav className="flex items-center gap-6 text-sm">
           <Link
@@ -56,12 +49,6 @@ export function Header() {
           >
             GitHub
           </Link>
-          <button
-            onClick={handleOpenChat}
-            className="inline-flex items-center justify-center rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background shadow transition-all hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
-          >
-            Ask AI
-          </button>
           <ThemeToggle />
         </nav>
       </div>

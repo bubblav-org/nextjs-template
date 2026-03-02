@@ -10,6 +10,7 @@ import {
 } from 'lucide-react'
 import { BubblaVWidget } from '@bubblav/ai-chatbot-react'
 import { Header } from '@/components/Header'
+import { AskAiButton } from '@/components/AskAiButton'
 
 const WEBSITE_ID = process.env.NEXT_PUBLIC_BUBBLAV_WEBSITE_ID || ''
 
@@ -80,6 +81,7 @@ export default function HomePage() {
                 <div className="w-px h-4 bg-primary-foreground/20 mx-1" />
                 Deploy to Vercel
               </Link>
+              <AskAiButton />
             </div>
           </div>
         </div>
