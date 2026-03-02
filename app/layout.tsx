@@ -1,39 +1,42 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
-import { ThemeProvider } from './providers';
-import { BubblaVChatbot } from '@/components/bubblav-chatbot';
+import type { Metadata } from 'next'
+import { Geist, Geist_Mono } from 'next/font/google'
+import './globals.css'
+import { ThemeProvider } from 'next-themes'
 
-const inter = Inter({
+const geistSans = Geist({
+  variable: '--font-geist-sans',
   subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-});
+})
+
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+})
 
 export const metadata: Metadata = {
-  title: 'BubblaV AI Chatbot - NextJS Starter Template',
-  description:
-    'A fast, intelligent AI chatbot for your website. Deploy in 5 minutes with no coding required. Powered by Google Gemini 2.5 Flash.',
-};
+  title: 'BubblaV - AI Chatbot Starter Template',
+  description: 'Build AI chatbots in minutes. A fast, intelligent AI chatbot for your website powered by AI.',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <BubblaVChatbot />
           {children}
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }
