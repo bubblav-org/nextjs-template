@@ -79,7 +79,7 @@ export default function HomePage() {
                   <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" />
                 </svg>
                 <div className="w-px h-4 bg-primary-foreground/20 mx-1" />
-                Deploy to Vercel
+                Deploy
               </Link>
               <AskAiButton />
             </div>
