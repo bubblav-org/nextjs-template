@@ -6,7 +6,7 @@ A production-ready Next.js 16 starter template with built-in [BubblaV AI Chatbot
 
 ## Live Demo
 
-- **NextJS Template**: https://bubblav-nextjs-template.vercel.app
+- **NextJS Template**: https://bubblav-nextjs-template.chester-nht-1986.workers.dev (hosted on Cloudflare Workers)
 
 ## Features
 
@@ -29,6 +29,20 @@ Click the button above to deploy with one click. Vercel will prompt you for the 
 2. Add it as an environment variable in Vercel
 3. Your site redeploys automatically with the chatbot active
 
+### ☁️ Deploy to Cloudflare Workers
+
+The canonical deployment of this template runs on **Cloudflare Workers Static Assets** — the site is built as a fully static export (`output: 'export'`) and served from the edge.
+
+```bash
+# Build the static export into out/ (bakes NEXT_PUBLIC_* into the bundle)
+NEXT_PUBLIC_BUBBLAV_WEBSITE_ID=your-website-id npm run build
+
+# Deploy (requires wrangler + a Cloudflare account)
+npx wrangler deploy
+```
+
+See `wrangler.jsonc` for the Worker configuration (worker name: `bubblav-nextjs-template`). Because `NEXT_PUBLIC_*` variables are inlined at build time, set them in your shell or `.env.production` before `npm run build` — changing wrangler `vars` alone does not rebuild the site.
+
 ### 💻 Run Locally
 
 ```bash
@@ -44,9 +58,10 @@ npm run dev
 # 4. Make changes and see them instantly!
 ```
 
-For production builds:
+For production builds (static export → `out/`):
 ```bash
-npm run build && npm start
+npm run build
+npm start    # previews the export via wrangler dev
 ```
 
 ## Setting Up Your AI Chatbot
