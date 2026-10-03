@@ -15,10 +15,10 @@ npm install
 # Development server (port 3000)
 npm run dev
 
-# Production build
+# Production build (static export → out/)
 npm run build
 
-# Start production server
+# Preview the export locally via wrangler
 npm start
 
 # Lint code
@@ -158,20 +158,29 @@ Use kebab-case for file names. Keep files under 200 lines for maintainability.
 
 ## Deployment
 
-### Vercel (Recommended)
+### Cloudflare Workers (canonical)
 
-This template is optimized for Vercel deployment:
+This project deploys to **Cloudflare Workers Static Assets** as a fully static
+export — there is no SSR runtime to port.
 
-1. **One-click deploy**: Use the "Deploy with Vercel" button in README
-2. **Environment variables**: Set `NEXT_PUBLIC_BUBBLAV_WEBSITE_ID` in Vercel dashboard
-3. **Automatic deploys**: Push to GitHub for automatic Vercel builds
-4. **Preview deployments**: PR previews build automatically
+- `next.config.ts` sets `output: "export"` and `images.unoptimized`, so
+  `npm run build` emits the site to `out/`.
+- `wrangler.jsonc` defines the Worker `bubblav-nextjs-template` with
+  `assets.directory: "out"` and `not_found_handling: "404-page"` (out/404.html).
+- Deploy with `npx wrangler deploy`; the site serves from
+  `https://bubblav-nextjs-template.<subdomain>.workers.dev`.
+- `NEXT_PUBLIC_BUBBLAV_WEBSITE_ID` is **inlined at build time** — set it in the
+  shell or `.env.production` before `npm run build`. The copy in wrangler `vars`
+  documents the value but does not affect the deployed bundle.
+
+The README's "Deploy with Vercel" button remains for template cloners targeting
+Vercel; the template itself no longer needs Vercel-specific config.
 
 ### Manual Build
 
 ```bash
-npm run build    # Creates .next production build
-npm start        # Starts production server
+npm run build    # Creates out/ static export
+npx wrangler dev --assets out  # Optional: preview locally
 ```
 
 ## Troubleshooting

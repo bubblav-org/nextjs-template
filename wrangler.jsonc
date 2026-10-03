@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bubblav-nextjs-template",
+  "compatibility_date": "2026-10-01",
+  "account_id": "97f75e1ac993d6d5307123ab44d0b40b",
+  "assets": {
+    "directory": "out",
+    "not_found_handling": "404-page"
+  },
+  // NEXT_PUBLIC_BUBBLAV_WEBSITE_ID is a public build-time var: it is baked into
+  // the static bundle by `next build` (set it in the shell or .env.production
+  // before building). Declared here so the value is recorded alongside the
+  // worker; changing it alone does NOT rebuild the site.
+  "vars": {
+    "NEXT_PUBLIC_BUBBLAV_WEBSITE_ID": "812b25b4-02df-40fa-9f68-3a99b372b1a1"
+  },
+  "workers_dev": true,
+  "preview_urls": true,
+  "observability": {
+    "enabled": true
+  }
+}
